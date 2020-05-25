@@ -12,7 +12,15 @@ export const buttonStyles = () => (
     <>
         <Button appearance="primary">Primary Button</Button>
         <Button appearance="secondary">Secondary Button</Button>
-        <Button appearance="outline">Outline Button</Button>
+        <Button appearance="tertiary">Tertiary Button</Button>
+    </>
+);
+
+export const disabled = () => (
+    <>
+        <Button isDisabled="true" appearance="primary">Primary Button Disabled</Button>
+        <Button isDisabled="true" appearance="secondary">Secondary Button Disabled</Button>
+        <Button isDisabled="true" appearance="tertiary">Tertiary Button Disabled</Button>
     </>
 );
 
