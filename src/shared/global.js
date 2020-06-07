@@ -1,13 +1,14 @@
 import { createGlobalStyle, css } from 'styled-components';
-// import { color, typography } from './styles';
 
 export const cssColourVars = css`
   --navy: #24195a;
   --purple: #5952A2;
   --royal: #3a55a4;
+  --aqua-100: #E0FEFF;
   --aqua: #3fc6f3;
   --aqua-light: #51D1F5;
   --aqua-dark: #32A2CC;
+  --pink-100: #FFE1F3;
   --pink: #cf4e9c;
   --yellow: #fde006;
   --text: #212b36;
@@ -53,6 +54,14 @@ export const globalElementStyles = css`
 export const bodyStyles = css`
   font-family: 'Montserrat', sans-serif;
   font-size: 1.6rem;
+
+  p{
+    margin: 0 0 20px 0;
+  }
+
+  p:last-child{
+    margin: 0;
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`
