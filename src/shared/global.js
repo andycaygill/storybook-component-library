@@ -62,6 +62,11 @@ export const bodyStyles = css`
   p:last-child{
     margin: 0;
   }
+
+  button{
+    border: 0;
+    background: none;
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`
