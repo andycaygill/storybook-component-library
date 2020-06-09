@@ -86,25 +86,30 @@ export function FeedbackIndicator( {
     }){
 
     return(
-        <FeedbackContainer {...props}>
-            <IconColumn>
-                <IconContainer>
-                    <IconBackground {...props}>
-                        <FontAwesomeIcon icon={getIcon(props.appearance)} size="xs" />
-                    </IconBackground>
-                </IconContainer>
-            </IconColumn>
-            <ContentColumn>
-                {props.children}
-            </ContentColumn>
-            <CloseButton onClick={e => props.closeFunction(e)}>
-                <FontAwesomeIcon icon={faTimes} />
-            </CloseButton>
-        </FeedbackContainer>
+        <>
+        {props.isOpen &&
+            <FeedbackContainer {...props}>
+                <IconColumn>
+                    <IconContainer>
+                        <IconBackground {...props}>
+                            <FontAwesomeIcon icon={getIcon(props.appearance)} size="xs" />
+                        </IconBackground>
+                    </IconContainer>
+                </IconColumn>
+                <ContentColumn>
+                    {props.children}
+                </ContentColumn>
+                <CloseButton onClick={e => props.closeFunction(e)}>
+                    <FontAwesomeIcon icon={faTimes} />
+                </CloseButton>
+            </FeedbackContainer>
+        }
+        </>
     );
 }
 
 FeedbackIndicator.propTypes = {
     closeFunction: PropTypes.func.isRequired,
-    appearance: PropTypes.string
+    appearance: PropTypes.string,
+    isOpen: PropTypes.bool.isRequired
 };
