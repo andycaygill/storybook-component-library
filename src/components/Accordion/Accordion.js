@@ -6,25 +6,40 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 const AccordionHeader = styled.button`
     font-weight: bold;
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--navy);
+    color: #fff;
+    padding: 10px;
+    width: 100%;
 
-    &::before{
+    svg{
+        width: 20px;
+        height: 20px;
+        transform: rotate(0deg);
+        transition: all 0.3s;
 
+        ${props => props.isOpen && `
+            transform: rotate(180deg);
+        `}
     }
 `
 
 const AccordionContainer = styled.div`
 `
-const AccordionGroupContainer = styled.div`
-    border: 1px solid;
-    margin: 0 0 20px 0;
+
+const AccordionContent = styled.div`
+    background-color: var(--neutral-300);
+    padding: 10px;
 `
 
+const AccordionGroupContainer = styled.div`
+    margin: 0 0 20px 0;
+`
 
 export function Accordion( {
         ...props
     }){
-
 
     const [openAccordions, setOpenAccordions] = useState([0]);
     
@@ -45,14 +60,16 @@ export function Accordion( {
         <AccordionGroupContainer>
             {props.items.map((accordion, index) => (
                 <AccordionContainer key={`accordion-${index}`}>
-                    <AccordionHeader onClick={()=> toggleHandler(index)}>
+                    <AccordionHeader onClick={()=> toggleHandler(index)} isOpen={openAccordions.includes(index)}>
                         {accordion.heading} <FontAwesomeIcon icon={faAngleDown} />
                     </AccordionHeader>
+                
                     {openAccordions.includes(index) && 
-                        <>
-                            {accordion.content}
-                        </>
+                        <AccordionContent>
+                            {typeof accordion.content === 'function' ? <accordion.content /> : accordion.content}
+                        </AccordionContent>
                     }
+                    
                 </AccordionContainer>
             ))}
         </AccordionGroupContainer>
@@ -61,11 +78,8 @@ export function Accordion( {
 
 
 Accordion.propTypes = {
-    /*
-    closeFunction: PropTypes.func.isRequired,
-    isOpen: PropTypes.bool.isRequired,
-    width: PropTypes.number
-    */
+    items: PropTypes.object.isRequired,
+    nultiple: PropTypes.bool,
 };
 
 Accordion.defaultProps = {

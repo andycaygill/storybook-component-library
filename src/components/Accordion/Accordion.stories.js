@@ -1,10 +1,17 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Accordion, AccordionGroup } from './Accordion';
+import { Accordion } from './Accordion';
 
 export default { title: 'Accordions' };
 
+const AccordionContentComponent = () => {
+    return (
+        <div>
+            <p>This content is a react component, can be used to add HTML into the accordion content</p>
+        </div>
+    )
+};
 
 export const BasicAccordionExample = () => {
 
@@ -18,11 +25,23 @@ export const BasicAccordionExample = () => {
             content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet asperiores ab id enim, consectetur quia'
         }
     ]
+
+    const accordionItemsWithComponent = [
+        {
+            heading: 'Accordion Heading 1',
+            content: AccordionContentComponent
+        },
+        {
+            heading: 'Accordion Heading 2',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet asperiores ab id enim, consectetur quia'
+        }
+    ]
     
     return (
         <>
             <Accordion items={accordionItems}/>
             <Accordion items={accordionItems} multiple={true} />
+            <Accordion items={accordionItemsWithComponent} />
         </>
     );
 };
