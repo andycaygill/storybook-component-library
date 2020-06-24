@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,7 +12,6 @@ const ModalContainer = styled.div`
     width: 100%;
     height: 100%;
     overflow: auto;
-    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,6 +27,7 @@ const ModalContent = styled.div`
     max-height: 80%;
     max-width: 80%;
     overflow: auto;
+    z-index: 999;
 
     ${props => props.width && `
         max-width: ${props.width}px;
@@ -50,22 +50,52 @@ const CloseButton = styled.button`
     right: 5px;
 `
 
+const getFirstFocusableChild = (rootElement) => {
+    const focusable = rootElement.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if(focusable.length > 0){
+        return focusable[0];
+    }
+}
+
 export function Modal( {
         ...props
     }){
+
+    const escFunction = useCallback((event) => {
+        if(event.keyCode === 27) {
+            props.closeFunction();
+            document.removeEventListener("keydown", escFunction, false);
+        }
+    }, []);
+
+    useEffect(() => {
+        if(props.isOpen){
+            document.addEventListener("keydown", escFunction, false);
+        }
+
+        if(modalContent.current){
+            const firstFocusableElement = getFirstFocusableChild(modalContent.current);
+            if(firstFocusableElement){
+                firstFocusableElement.focus();
+            }
+        }
+    }, [props.isOpen]);
+
+    const modalContent = useRef(null);
     return(
         <>
             {props.isOpen &&
                 <>
                     <ModalContainer>
-                        <ModalContent {...props}>
+                        <ModalContent role="dialog" aria-modal="true" {...props} ref={modalContent} tabindex="0">
                             {props.children}
-                            <CloseButton onClick={e => props.closeFunction(e)}>
+                            <CloseButton onClick={() => props.closeFunction()}>
                                 <FontAwesomeIcon icon={faTimes} />
                             </CloseButton>
                         </ModalContent>
+                        <ModalOverlay onClick={() => props.closeFunction()}/>
                     </ModalContainer>
-                    <ModalOverlay onClick={e => props.closeFunction(e)} />
+                    
                 </>
             }
         </>
