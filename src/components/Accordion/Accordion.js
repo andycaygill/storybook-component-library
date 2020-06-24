@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Heading } from '../Heading/Heading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { slugify } from '../../shared/componentUtils/slugify'
 
 const AccordionHeader = styled.button`
     font-weight: bold;
@@ -26,6 +28,9 @@ const AccordionHeader = styled.button`
 `
 
 const AccordionContainer = styled.div`
+    h1,h2,h3,h4,h5,h6{
+        margin: 0;
+    }
 `
 
 const AccordionContent = styled.div`
@@ -56,16 +61,24 @@ export function Accordion( {
             }
         }
     }
+
     return(
         <AccordionGroupContainer>
             {props.items.map((accordion, index) => (
                 <AccordionContainer key={`accordion-${index}`}>
-                    <AccordionHeader onClick={()=> toggleHandler(index)} isOpen={openAccordions.includes(index)}>
-                        {accordion.heading} <FontAwesomeIcon icon={faAngleDown} />
-                    </AccordionHeader>
-                
+                    <Heading level={props.headingLevel}>
+                        <AccordionHeader 
+                            aria-controls={`${slugify(accordion.heading)}-${index}`} 
+                            aria-expanded={openAccordions.includes(index) ? true : false}
+                            onClick={()=> toggleHandler(index)} 
+                            isOpen={openAccordions.includes(index)}
+                        >
+                            {accordion.heading} 
+                            <FontAwesomeIcon icon={faAngleDown} />
+                        </AccordionHeader>
+                    </Heading>
                     {openAccordions.includes(index) && 
-                        <AccordionContent>
+                        <AccordionContent id={`${slugify(accordion.heading)}-${index}`}>
                             {typeof accordion.content === 'function' ? <accordion.content /> : accordion.content}
                         </AccordionContent>
                     }
@@ -78,8 +91,9 @@ export function Accordion( {
 
 
 Accordion.propTypes = {
-    items: PropTypes.object.isRequired,
-    nultiple: PropTypes.bool,
+    items: PropTypes.array.isRequired,
+    multiple: PropTypes.bool,
+    headingLevel: PropTypes.number.isRequired
 };
 
 Accordion.defaultProps = {

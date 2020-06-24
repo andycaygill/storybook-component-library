@@ -39,9 +39,9 @@ export const BasicAccordionExample = () => {
     
     return (
         <>
-            <Accordion items={accordionItems}/>
-            <Accordion items={accordionItems} multiple={true} />
-            <Accordion items={accordionItemsWithComponent} />
+            <Accordion items={accordionItems} headingLevel={2}/>
+            <Accordion items={accordionItems} multiple={true} headingLevel={3} />
+            <Accordion items={accordionItemsWithComponent} headingLevel={4} />
         </>
     );
 };
