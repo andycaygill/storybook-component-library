@@ -1,12 +1,16 @@
 import React from 'react';
 // import styled from 'styled-components';
 import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 
 import { Button } from './Button';
 // import { Icon } from './Icon';
 // import { StoryLinkWrapper } from './StoryLinkWrapper';
 
-export default { title: 'Button' };
+export default { 
+    title: 'Button',
+    decorators: [withA11y]
+};
 
 export const buttonStyles = () => (
     <>

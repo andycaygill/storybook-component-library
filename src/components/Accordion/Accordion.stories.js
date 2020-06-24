@@ -1,9 +1,13 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 
 import { Accordion } from './Accordion';
 
-export default { title: 'Accordions' };
+export default { 
+    title: 'Accordions',
+    decorators: [withA11y]
+};
 
 const AccordionContentComponent = () => {
     return (
@@ -28,11 +32,11 @@ export const BasicAccordionExample = () => {
 
     const accordionItemsWithComponent = [
         {
-            heading: 'Accordion Heading 1',
+            heading: 'Accordion Heading 3',
             content: AccordionContentComponent
         },
         {
-            heading: 'Accordion Heading 2',
+            heading: 'Accordion Heading 4',
             content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet asperiores ab id enim, consectetur quia'
         }
     ]

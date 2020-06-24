@@ -1,9 +1,13 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 
 import { TextInput } from './TextInput';
 
-export default { title: 'Text Input' };
+export default { 
+    title: 'Text Input',
+    decorators: [withA11y]
+};
 
 export const Input = () => (
     <>

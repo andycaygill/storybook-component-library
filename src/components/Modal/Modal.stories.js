@@ -1,10 +1,14 @@
 import React,{ useState } from 'react';
 import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 
 import { Modal } from './Modal';
 import { Heading } from '../Heading/Heading';
 
-export default { title: 'Modals' };
+export default {
+    title: 'Modals',
+    decorators: [withA11y],
+  };
 
 export const BasicModal = () => {
     const [isOpen, setIsOpen] = useState(false);

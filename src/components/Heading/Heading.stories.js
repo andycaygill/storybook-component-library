@@ -1,9 +1,13 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 
 import { Heading } from './Heading';
 
-export default { title: 'Heading' };
+export default { 
+    title: 'Heading',
+    decorators: [withA11y] 
+};
 
 export const BasicHeadings = () => (
     <>

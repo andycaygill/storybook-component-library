@@ -1,10 +1,14 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 
 import { FeedbackIndicator } from './FeedbackIndicator';
 import { Heading } from '../Heading/Heading';
 
-export default { title: 'Feedback Indicator' };
+export default { 
+    title: 'Feedback Indicator',
+    decorators: [withA11y]
+};
 
 const closeFeedbackIndicator = () => {
     console.log('close');

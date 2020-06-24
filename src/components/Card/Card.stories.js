@@ -1,10 +1,14 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 
 import { Card } from './Card';
 import { Heading } from '../Heading/Heading';
 
-export default { title: 'Cards' };
+export default { 
+    title: 'Cards',
+    decorators: [withA11y]
+};
 
 export const BasicCard = () => (
     <>
