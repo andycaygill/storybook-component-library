@@ -33,6 +33,7 @@ export const FixedWidthModal = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <>
+            <button onClick={() => setIsOpen(true)}>Open Modal</button>
             <Modal isOpen={isOpen} closeFunction={() => setIsOpen(false) } width={300}>
                 <Heading level={5} as="h1">Modal Heading</Heading>
                 <p>By default, modal width will depend on the size of the content inside</p>
